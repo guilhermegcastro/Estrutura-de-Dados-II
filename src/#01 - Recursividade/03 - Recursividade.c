@@ -10,10 +10,13 @@
 #include <stdlib.h>
 
 int maiorValor(int a[], int t) {
-    if(!t) return a[t];
+    if(!t) 
+        return a[t];
     int n = maiorValor(a, t-1);
-    if(a[t] > n) return a[t];
-    else return n;
+    if(a[t] > n) 
+        return a[t];
+    else 
+        return n;
 }
 
 int main() {
