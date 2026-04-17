@@ -1,5 +1,5 @@
 /**
-* @file 04_fila.h
+* @file 04_lista_genérica.h
 * @author @guilhermegcastro
 * @date 2026-04-10
 * @brief

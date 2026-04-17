@@ -21,7 +21,7 @@
 #include <string.h>
 #include <time.h>
 #include "easyfunc.h"
-#include "04_fila.h"
+#include "04_lista_genérica.h"
 
 int indice = 0;
 
