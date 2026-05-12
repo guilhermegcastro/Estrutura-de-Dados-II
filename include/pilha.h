@@ -37,5 +37,12 @@ void print_Entity(Entity* entity){
     
 };
 
-
+void next(char* label){
+    if (label!=NULL){
+        printf("%s", label);
+    }
+    while(getchar()!='\n');
+    getchar();
+    system("clear");
+}
 

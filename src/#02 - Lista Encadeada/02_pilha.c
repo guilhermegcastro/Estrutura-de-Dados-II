@@ -10,8 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "easyfunc.h"// Presente no diretório de ED2 no github.
-#include "02_pilha.h" // Presente no diretório de ED2 no github.
+#include "pilha.h" 
 #define ENTIDADE "Pessoa"
 
 
@@ -38,8 +37,9 @@ int main() {
 
 int interface(){
     int opc;
-    header("=-=", 25, " MENU ");
+ 
     printf( 
+        " =-=-=-=-= MENU =-=-=-=-=\n"
         "1 - Cadastrar %s\n"
         "2 - Listar %ss\n"
         "0 - Encerrar Programa\n"
@@ -54,7 +54,7 @@ Entity* novaPessoa(Entity* topo){
     int i;
     float p;
     system("clear");
-    header("§/", 25, " CADASTRO ");
+   printf(" =-=-=-=-= CADASTRO =-=-=-=-=\n");
     printf(">> Insira o nome da %s: > ", ENTIDADE);
     scanf(" %99[^\n]", n);
     while(getchar()!='\n');

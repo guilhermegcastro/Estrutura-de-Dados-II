@@ -13,144 +13,137 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "easyfunc.h"
+#include "documento.h"
 
-typedef struct Doc {
-    char* nome;
-    int id; 
-    int bytes;
-    struct Doc* prox;
-}Doc;
+int indice = 0; // Proibido usar variável global em E.D. com Adriano... So não vou mudar porque to com preguiça :P
 
-int indice = 0;
-
-Doc* printDoc(Doc* doc){
-    header(" - ", 11, " IMPRIMINDO DOCUMENTO ");
+Doc printDoc(Doc doc){
+    printf("IMPRIMINDO DOCUMENTO\n");
     if(!doc){
         next("Sem documentos para imprimir! APERTE ENTER...");
         return doc;
     }
-    printf(" O Documento %s (%d) foi impresso!\n", doc->nome, doc->bytes);
+    printf(" O Documento %s (%d) foi impresso!\n", doc->name, doc->bytes);
     next("APERTE ENTER...");
-    Doc* new_head = doc->prox;
+    Doc new_head = doc->next;
     free(doc);
     return new_head;
 }
 
-Doc* new_Document(Doc* list, char* n, int i, int b){
-    Doc* d = malloc(sizeof(Doc));
-    d->nome = malloc(strlen(n)+1);
-    strcpy(d->nome, n);
+Doc new_Document(Doc list, char* n, int i, int b){
+    Doc d = malloc(sizeof(Doc));
+    d->name = malloc(strlen(n)+1);
+    strcpy(d->name, n);
     d->id = i;
     d->bytes = b;
     if(list)
-        list->prox = d;
-    d->prox = NULL;
+        list->next = d;
+    d->next = NULL;
     return d;
 }
 
-void printLista(Doc* list){
+void printLista(Doc list){
     if(!list){
         next("Sem documentos na fila! PRESSIONE ENTER...");
         return;
     }
     printf(" ID - NOME\n");
     while(list){
-        printf(" %2d   %-30s (%d bytes)\n", list->id, list->nome, list->bytes);
-        list = list->prox;
+        printf(" %2d   %-30s (%d bytes)\n", list->id, list->name, list->bytes);
+        list = list->next;
     }
 }
 
-Doc* anterior(Doc* alvo, Doc* list){
+Doc anterior(Doc alvo, Doc list){
     while(list){
-        if(list->prox == alvo)
+        if(list->next == alvo)
             return list;
-        list = list->prox;
+        list = list->next;
     }
     return NULL;
 }
 
-void excluirDoc(Doc** head, Doc** tail){
+void excluirDoc(Doc head, Doc tail){
     system("clear");
-    header(" - ", 11, " EXCLUIR DOCUMENTO ");
-    printLista(*head);
-    if(!*head)
+    printf("EXCLUIR DOCUMENTO\n");
+    printLista(head);
+    if(!head)
         return;
     int id;
     printf("INSIRA O ID DO DOCUMENTO QUE DESEJA DELETAR: > ");
     scanf(" %d", &id);
-    Doc* alvo;
-    if((*head)->id == id){
-        alvo = (*head)->prox;
-        free(*head);
-        *head = alvo;
-        printf("Documento %s deletado! Pressione ENTER...", (*head)->nome);
+    Doc alvo;
+    if((head)->id == id){
+        alvo = (head)->next;
+        free(head);
+        head = alvo;
+        printf("Documento %s deletado! Pressione ENTER...", (head)->name);
     } 
-    alvo = *head;
+    alvo = head;
     while (alvo){
         if(alvo->id == id){
-            Doc* alvo_anterior = anterior(alvo, *head);
-            alvo_anterior->prox = alvo->prox;
-            if(alvo == *tail)
-                *tail = alvo_anterior;
-            printf("Documento %s deletado! Pressione ENTER...", alvo->nome);
+            Doc alvo_anterior = anterior(alvo, head);
+            alvo_anterior->next = alvo->next;
+            if(alvo == tail)
+                tail = alvo_anterior;
+            printf("Documento %s deletado! Pressione ENTER...", alvo->name);
             free(alvo);
             next(NULL);
         }
-        alvo = alvo->prox;
+        alvo = alvo->next;
     }
     
 }
-void docPrio(Doc** head, Doc** tail){
+void docPrio(Doc head, Doc tail){
     system("clear");
-    header(" - ", 11, " DOCUMENTO PRIORITÁRIO ");
-    printLista(*head);
-    if(!*head)
+    printf("PRIORIZAR DOCUMENTO\n");
+    printLista(head);
+    if(!head)
         return;
     int id;
     printf("INSIRA O ID DO DOCUMENTO QUE DESEJA PRIORIZAR: > ");
     scanf(" %d", &id);
-    if((*head)->id == id) {
+    if((head)->id == id) {
         next(" O ID do documento informado já está na frente da fila!\n PRESSIONE ENTER...");
         return;
     }
-    Doc* alvo = (*head)->prox;
+    Doc alvo = (head)->next;
     while(alvo){
         if(alvo->id == id){
-            Doc* antes_alvo = anterior(alvo, *head);
-            antes_alvo->prox = alvo->prox;
-            if(alvo == *tail)
-               *tail = antes_alvo;
-            alvo->prox = *head;
-            *head = alvo;
+            Doc antes_alvo = anterior(alvo, head);
+            antes_alvo->next = alvo->next;
+            if(alvo == tail)
+               tail = antes_alvo;
+            alvo->next = head;
+            head = alvo;
             system("clear");
-            header(" - ", 11, " DOCUMENTO PRIORITÁRIO ");
-            printLista(*head);
-            printf("Documento %s inserido no inicio da fila! PRESSIONE ENTER...", (*head)->nome);
+            printf("PRIORIZAR DOCUMENTO");
+            printLista(head);
+            printf("Documento %s inserido no inicio da fila! PRESSIONE ENTER...", (head)->name);
             next(NULL);
             return;
         }
-        alvo = alvo->prox;
+        alvo = alvo->next;
     }
     next("ID não encontrado! PRESSIONE ENTER...");
     return;
 }
 
-Doc* novoDoc(Doc* list){
+Doc novoDoc(Doc list){
     system("clear");
-    char nome[100];
+    char name[100];
     int id = indice, bytes = 100 + rand()%500;
     indice++;
-    header("=", 50, " NOVO DOCUMENTO ");
+    printf("NOVO DOCUMENTO\n");
     printf("Insira o nome do arquivo: ");
-    scanf(" %[^\n]", nome);
+    scanf(" %[^\n]", name);
     next("DOCUMENTO CRIADO! PRESSIONE ENTER...");
-    return new_Document(list, nome, id, bytes);
+    return new_Document(list, name, id, bytes);
 }
 
 int interface(){
     int opt;
-    header("=", 50, " IMPRESSORA ");
+    printf("IMPRESSORA\n");
     printf(
         "1. Criar Documento\n"
         "2. Fila de Impressão\n"
@@ -163,8 +156,8 @@ int interface(){
 }
 
 int main(){
-    Doc* list_head = NULL;
-    Doc* list_tail = NULL;
+    Doc list_head = NULL;
+    Doc list_tail = NULL;
     while(1){
         switch (interface()){
             case 1: 
@@ -174,7 +167,7 @@ int main(){
                 break;
             case 2: 
                 system("clear");
-                header("= ", 15, " FILA DE IMPRESSÃO ");
+                printf("FILA DE IMPRESSÃO\n");
                 printLista(list_head);
                 if(list_head)
                     next("FIM DA LISTA! PRESSIONE ENTER...");
@@ -182,9 +175,9 @@ int main(){
             case 3: 
                 list_head = printDoc(list_head);
                 break;
-            case 4: excluirDoc(&list_head, &list_tail);
+            case 4: excluirDoc(list_head, list_tail);
                 break;
-            case 5: docPrio(&list_head, &list_tail);
+            case 5: docPrio(list_head, list_tail);
                 break;
             default: next("Opção inválida. Aperte ENTER...");
         }

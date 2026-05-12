@@ -2,7 +2,7 @@
 * @file docker.h
 * @author @guilhermegcastro
 * @date 2026-05-08
-* @brief
+* @brief header para utilizar no codigo "08_docker_simulador.c"
 **/
 
 #include <stdio.h>
@@ -73,6 +73,17 @@ void clear_listC(ListCon l){
         atual = proximo;
     }
     free(l);
+}
+
+
+void cabecalho(int t, char c, char* title){
+    for (int i = 0; i < t; i++) {
+        if(i == t/2){
+            printf("%s", title);
+            return;
+        }
+    putchar(c);
+    }
 }
 
 void next(char* label){

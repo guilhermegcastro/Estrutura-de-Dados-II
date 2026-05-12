@@ -83,7 +83,7 @@ void listar_Imagem(ListIma l){
         return;
     }
     system("clear");
-    printf("~ ### LISTA DE IMAGENS ### ~\n");
+    cabecalho(50, '=', " ### LISTA DE IMAGENS ### ");
     while(alvo){
         printf(" ID: %2d | NOME: %s\n", alvo->id, alvo->name);
         alvo = alvo->next;
@@ -101,6 +101,7 @@ void baixar_Imagem (ListIma l, int *c){
     nova->name = malloc(strlen(nome)+1);
     strcpy(nova->name, nome);
     nova->id = (*c)++;
+    nova->next = NULL;
     nova->listC = new_listC();
     if(!l->head) { // Se não há cabeça, ele é o primeiro.
         nova->previous = nova->next = NULL; // O anterior e o próximo são nulos, já que só existe uma imagem na lista.
@@ -277,6 +278,7 @@ void deletar_container(ListIma l){
     if(alvo->exe){
         next("O container selecionado não está interrompido!");
         return;
+        
     }
     if(alvo == alvo->image->listC->head && alvo == alvo->image->listC->tail){ //Se o container for o único da lista...
      alvo->image->listC->head = alvo->image->listC->tail = NULL;
