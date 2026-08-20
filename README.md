@@ -2,7 +2,7 @@
 
 ![C Language](https://img.shields.io/badge/Language-C-00599C?style=for-the-badge&logo=c&logoColor=white)
 ![OS](https://img.shields.io/badge/OS-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 > "C is quirky, flawed, and an enormous success." - Dennis Ritchie
