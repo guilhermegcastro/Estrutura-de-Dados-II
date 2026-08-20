@@ -13,7 +13,11 @@
 
 Boas-vindas ao meu repositório de **Estrutura de Dados II**.
 
-Este repositório serve como o meu portfólio acadêmico e "segundo cérebro", documentando a minha evolução na disciplina. Aqui você encontrará desde recursividade até a implementação de estruturas encadeadas e genéricas, com headers organizados separadamente das implementações.
+Este repositório serve como o meu portfólio acadêmico e "segundo cérebro", documentando a minha evolução na disciplina. Aqui você encontrará desde recursividade até a implementação de estruturas encadeadas e genéricas, com headers organizados separadamente das implementações, baseado nos exercícios propostos pelo professor Adriano Prates.
+
+<p align="center">
+  <img src="https://github.com/guilhermegcastro/Estrutura-de-Dados-II/raw/main/images/when-the-coding-when-the.gif" width="400px" />
+</p>
 
 ---
 
